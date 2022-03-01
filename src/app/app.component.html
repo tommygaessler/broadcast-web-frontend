@@ -1,0 +1,11 @@
+<h1>IVS Web Broadcast</h1>
+<p *ngIf="!live && !loading">Enter your name and click "Start Livestream" to start live streaming. An AWS IVS playback URL will be returned so you can display and distribute the livestream to your audience.</p>
+<form *ngIf="!live && !loading" (submit)="startLiveStream()">
+  <input type="text" autocomplete="off" placeholder="Your Name" [(ngModel)]="userName" name="userName">
+  <button class="primary" [disabled]="!userName">Start Livestream</button>
+</form>
+<button (click)="startAudoVideo()" *ngIf="!video && live && !loading" class="secondary">Enable Audio & Video</button>
+<button (click)="endLiveStream()" *ngIf="live" class="primary end">End Livestream</button>
+<img src="assets/ivs.png" alt="IVS Logo" *ngIf="loading">
+<canvas id="videoCanvas" width="1920" height="1080" *ngIf="live"></canvas>
+<p *ngIf="error && !loading">{{ error }}</p>
